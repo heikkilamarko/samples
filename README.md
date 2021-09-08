@@ -1,2 +1,3 @@
 # samples
-Misc sample code.
+
+Misc sample code and tips.

@@ -54,6 +54,10 @@
 
 - [hashicorp/cap](https://github.com/hashicorp/cap)
 
+## Validation
+
+- [go-playground/validator](https://github.com/go-playground/validator)
+
 ## JSON Schema
 
 - [gojsonschema](https://github.com/xeipuuv/gojsonschema)

@@ -50,6 +50,10 @@
 - [Centrifuge Library](https://github.com/centrifugal/centrifuge)
 - [Gorilla WebSocket](https://github.com/gorilla/websocket)
 
+## Workflow Orchestration
+
+- [Temporal](https://temporal.io/)
+
 ## Auth
 
 - [hashicorp/cap](https://github.com/hashicorp/cap)

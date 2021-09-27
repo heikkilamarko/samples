@@ -62,6 +62,8 @@
 
 - [go-playground/validator](https://github.com/go-playground/validator)
 
-## JSON Schema
+## JSON
 
+- [GJSON](https://github.com/tidwall/gjson)
+- [SJSON](https://github.com/tidwall/sjson)
 - [gojsonschema](https://github.com/xeipuuv/gojsonschema)

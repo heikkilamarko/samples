@@ -57,6 +57,7 @@
 ## Auth
 
 - [hashicorp/cap](https://github.com/hashicorp/cap)
+- [go-jose](https://github.com/go-jose/go-jose)
 
 ## Validation
 

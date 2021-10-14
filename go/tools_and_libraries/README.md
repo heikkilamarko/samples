@@ -1,4 +1,4 @@
-# Golang Libraries
+# Go Tools and Libraries
 
 ## Configuration
 
@@ -54,6 +54,10 @@
 
 - [Temporal](https://temporal.io/)
 
+## Application Proxy / Edge Router
+
+- [Traefik](https://traefik.io/traefik/)
+
 ## Auth
 
 - [hashicorp/cap](https://github.com/hashicorp/cap)
@@ -67,4 +71,5 @@
 
 - [GJSON](https://github.com/tidwall/gjson)
 - [SJSON](https://github.com/tidwall/sjson)
+- [mapstructure](https://github.com/mitchellh/mapstructure)
 - [gojsonschema](https://github.com/xeipuuv/gojsonschema)

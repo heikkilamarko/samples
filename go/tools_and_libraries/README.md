@@ -7,6 +7,7 @@
 ## Logging
 
 - [zerolog](https://github.com/rs/zerolog)
+- [zap](https://github.com/uber-go/zap)
 
 ## HTTP Routing
 
@@ -22,33 +23,21 @@
 
 ## Databases
 
-### PostgreSQL
-
-- [pgx](https://github.com/jackc/pgx)
-
-### SQL Server
-
-- [go-mssqldb](https://github.com/denisenkom/go-mssqldb)
-
-### SQLite
-
-- [go-sqlite3](https://github.com/mattn/go-sqlite3)
-
-## Database Migrations
-
-- [migrate](https://github.com/golang-migrate/migrate)
+- [pgx](https://github.com/jackc/pgx) (PostgreSQL)
+- [go-mssqldb](https://github.com/denisenkom/go-mssqldb) (SQL Server)
+- [go-sqlite3](https://github.com/mattn/go-sqlite3) (SQLite)
+- [migrate](https://github.com/golang-migrate/migrate) (Migrations)
+- [sqlc](https://sqlc.dev/)
 
 ## Messaging
 
-### Backend-Backend
-
 - [NATS](https://nats.io/)
 
-### Backend-Frontend
+## WebSocket
 
+- [Gorilla WebSocket](https://github.com/gorilla/websocket)
 - [Centrifugo Server](https://centrifugal.dev/)
 - [Centrifuge Library](https://github.com/centrifugal/centrifuge)
-- [Gorilla WebSocket](https://github.com/gorilla/websocket)
 
 ## Workflow Orchestration
 
@@ -66,6 +55,7 @@
 ## Validation
 
 - [go-playground/validator](https://github.com/go-playground/validator)
+- [govalidator](https://github.com/asaskevich/govalidator)
 
 ## JSON
 

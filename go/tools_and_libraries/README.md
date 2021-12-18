@@ -43,6 +43,10 @@
 
 - [Temporal](https://temporal.io/)
 
+## Data Engineering
+
+- [Benthos](https://www.benthos.dev/)
+
 ## Application Proxy / Edge Router
 
 - [Traefik](https://traefik.io/traefik/)

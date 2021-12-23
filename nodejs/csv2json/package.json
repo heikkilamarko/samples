@@ -1,0 +1,8 @@
+{
+  "name": "csv2json",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "csv-parse": "5.0.3"
+  }
+}

@@ -1,47 +1,26 @@
-package main
+package csv2json
 
 import (
 	"bufio"
 	"encoding/csv"
 	"encoding/json"
-	"flag"
-	"fmt"
 	"io"
 	"os"
 )
 
-func main() {
-	i, o := parseFlags()
-
-	if err := processFile(i, o); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+type ItemProcessor interface {
+	Process(header, item []string) (interface{}, error)
 }
 
-func parseFlags() (string, string) {
-	var i, o string
-
-	fs := flag.NewFlagSet("csv2json", flag.ExitOnError)
-
-	fs.StringVar(&i, "i", "", "input file (required)")
-	fs.StringVar(&o, "o", "", "output file")
-
-	fs.Parse(os.Args[1:])
-
-	if i == "" {
-		fs.Usage()
-		os.Exit(2)
-	}
-
-	if o == "" {
-		o = i + ".json"
-	}
-
-	return i, o
+type Processor struct {
+	ip ItemProcessor
 }
 
-func processFile(inFilePath, outFilePath string) error {
+func NewProcessor(ip ItemProcessor) *Processor {
+	return &Processor{ip}
+}
+
+func (p *Processor) ProcessFile(inFilePath, outFilePath string) error {
 	inFile, err := os.Open(inFilePath)
 	if err != nil {
 		return err
@@ -64,7 +43,7 @@ func processFile(inFilePath, outFilePath string) error {
 
 	defer w.Flush()
 
-	header, err := readHeader(r)
+	header, err := p.readHeader(r)
 	if err != nil {
 		return err
 	}
@@ -80,7 +59,7 @@ func processFile(inFilePath, outFilePath string) error {
 			return err
 		}
 
-		outItem, err := processItem(header, inItem)
+		outItem, err := p.ip.Process(header, inItem)
 		if err != nil {
 			return err
 		}
@@ -97,7 +76,7 @@ func processFile(inFilePath, outFilePath string) error {
 	return nil
 }
 
-func readHeader(r *csv.Reader) ([]string, error) {
+func (p *Processor) readHeader(r *csv.Reader) ([]string, error) {
 	h, err := r.Read()
 	if err != nil {
 		return nil, err
@@ -107,14 +86,4 @@ func readHeader(r *csv.Reader) ([]string, error) {
 	copy(header, h)
 
 	return header, nil
-}
-
-func processItem(header, item []string) (interface{}, error) {
-	m := map[string]interface{}{}
-
-	for i, v := range item {
-		m[header[i]] = v
-	}
-
-	return m, nil
 }

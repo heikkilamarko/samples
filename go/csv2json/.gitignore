@@ -1,3 +1,2 @@
-csv2json
-out.json
+*.json
 .DS_Store

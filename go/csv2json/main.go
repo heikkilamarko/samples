@@ -4,18 +4,48 @@ import (
 	"bufio"
 	"encoding/csv"
 	"encoding/json"
+	"flag"
+	"fmt"
 	"io"
-	"log"
 	"os"
 )
 
 func main() {
-	processFile("in.csv", "out.json")
+	i, o := parseFlags()
+
+	if err := processFile(i, o); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 }
 
-func processFile(inFilePath, outFilePath string) {
+func parseFlags() (string, string) {
+	var i, o string
+
+	fs := flag.NewFlagSet("csv2json", flag.ExitOnError)
+
+	fs.StringVar(&i, "i", "", "input file (required)")
+	fs.StringVar(&o, "o", "", "output file")
+
+	fs.Parse(os.Args[1:])
+
+	if i == "" {
+		fs.Usage()
+		os.Exit(2)
+	}
+
+	if o == "" {
+		o = i + ".json"
+	}
+
+	return i, o
+}
+
+func processFile(inFilePath, outFilePath string) error {
 	inFile, err := os.Open(inFilePath)
-	checkErr(err)
+	if err != nil {
+		return err
+	}
 
 	defer inFile.Close()
 
@@ -24,14 +54,20 @@ func processFile(inFilePath, outFilePath string) {
 	r.LazyQuotes = true
 
 	outFile, err := os.Create(outFilePath)
-	checkErr(err)
+	if err != nil {
+		return err
+	}
 
 	defer outFile.Close()
 
 	w := bufio.NewWriter(outFile)
 
+	defer w.Flush()
+
 	header, err := readHeader(r)
-	checkErr(err)
+	if err != nil {
+		return err
+	}
 
 	for {
 		inItem, err := r.Read()
@@ -40,18 +76,25 @@ func processFile(inFilePath, outFilePath string) {
 			break
 		}
 
-		checkErr(err)
+		if err != nil {
+			return err
+		}
 
-		outItem := processItem(header, inItem)
+		outItem, err := processItem(header, inItem)
+		if err != nil {
+			return err
+		}
 
 		bytes, err := json.Marshal(outItem)
-		checkErr(err)
+		if err != nil {
+			return err
+		}
 
 		w.Write(bytes)
 		w.WriteString("\n")
 	}
 
-	w.Flush()
+	return nil
 }
 
 func readHeader(r *csv.Reader) ([]string, error) {
@@ -66,18 +109,12 @@ func readHeader(r *csv.Reader) ([]string, error) {
 	return header, nil
 }
 
-func processItem(header, item []string) interface{} {
+func processItem(header, item []string) (interface{}, error) {
 	m := map[string]interface{}{}
 
 	for i, v := range item {
 		m[header[i]] = v
 	}
 
-	return m
-}
-
-func checkErr(err error) {
-	if err != nil {
-		log.Fatal(err)
-	}
+	return m, nil
 }

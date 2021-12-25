@@ -20,27 +20,21 @@ func (p *ManualMapProcessor) Process(header, item []string) (interface{}, error)
 
 	var err error
 
-	person := &Person{
-		Name: m["name"],
-	}
+	person := &Person{Name: m["name"]}
 
-	person.Age, err = strconv.Atoi(m["age"])
-	if err != nil {
+	if person.Age, err = strconv.Atoi(m["age"]); err != nil {
 		return nil, err
 	}
 
-	person.Height, err = strconv.ParseFloat(m["height"], 64)
-	if err != nil {
+	if person.Height, err = strconv.ParseFloat(m["height"], 64); err != nil {
 		return nil, err
 	}
 
-	person.IsActive, err = strconv.ParseBool(m["is_active"])
-	if err != nil {
+	if person.IsActive, err = strconv.ParseBool(m["is_active"]); err != nil {
 		return nil, err
 	}
 
-	person.CreatedAt, err = time.Parse(time.RFC3339, m["created_at"])
-	if err != nil {
+	if person.CreatedAt, err = time.Parse(time.RFC3339, m["created_at"]); err != nil {
 		return nil, err
 	}
 

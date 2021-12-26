@@ -1,25 +1,24 @@
-import fs from "fs";
-import { parse } from "csv-parse";
+import { Command } from "commander";
+import { processFile } from "./processor.js";
+import { processPerson } from "./person.js";
 
-async function processFile(inFile, outFile) {
-  const inStream = fs.createReadStream(inFile).pipe(
-    parse({
-      columns: true,
-      relax_quotes: true,
-    })
-  );
+const { input, output } = parseFlags();
 
-  const outStream = fs.createWriteStream(outFile);
+await processFile(input, output, processPerson);
 
-  for await (const inItem of inStream) {
-    const outItem = processItem(inItem);
-    outStream.write(JSON.stringify(outItem) + "\n");
+function parseFlags() {
+  const program = new Command();
+
+  program.requiredOption("-i, --input <file>", "input file");
+  program.option("-o, --output <file>", "output file");
+
+  program.parse();
+
+  const opts = program.opts();
+
+  if (!opts.output) {
+    opts.output = opts.input + ".json";
   }
-}
 
-function processItem(item) {
-  // TODO: Add transformation logic here.
-  return item;
+  return opts;
 }
-
-await processFile("in.csv", "out.json");

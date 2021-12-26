@@ -3,60 +3,59 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Demo
+namespace Sample;
+
+public class Startup
 {
-    public class Startup
+    public Startup(IConfiguration configuration)
     {
-        public Startup(IConfiguration configuration)
+        Configuration = configuration;
+    }
+
+    public IConfiguration Configuration { get; }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddControllers();
+
+        services.AddSpaStaticFiles(config =>
         {
-            Configuration = configuration;
-        }
+            config.RootPath = "TODO: set root path here";
+        });
+    }
 
-        public IConfiguration Configuration { get; }
-
-        public void ConfigureServices(IServiceCollection services)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        app.UseSpaStaticFiles(new StaticFileOptions
         {
-            services.AddControllers();
-
-            services.AddSpaStaticFiles(config =>
+            OnPrepareResponse = ctx =>
             {
-                config.RootPath = "TODO: set root path here";
-            });
-        }
+                if (ctx.Context.Request.Path.StartsWithSegments("/assets"))
+                {
+                    ctx.Context.Response.Headers.Add("Cache-Control", "max-age=31536000");
+                }
+            }
+        });
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        app.UseRouting();
+
+        app.UseEndpoints(endpoints =>
         {
-            app.UseSpaStaticFiles(new StaticFileOptions
+            endpoints.MapControllers();
+        });
+
+        app.UseSpa(spa =>
+        {
+            spa.Options.DefaultPageStaticFileOptions = new StaticFileOptions
             {
                 OnPrepareResponse = ctx =>
                 {
-                    if (ctx.Context.Request.Path.StartsWithSegments("/assets"))
+                    if (ctx.Context.Request.Path == "/index.html")
                     {
-                        ctx.Context.Response.Headers.Add("Cache-Control", "max-age=31536000");
+                        ctx.Context.Response.Headers.Add("Cache-Control", "no-store, max-age=0");
                     }
                 }
-            });
-
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-
-            app.UseSpa(spa =>
-            {
-                spa.Options.DefaultPageStaticFileOptions = new StaticFileOptions
-                {
-                    OnPrepareResponse = ctx =>
-                    {
-                        if (ctx.Context.Request.Path == "/index.html")
-                        {
-                            ctx.Context.Response.Headers.Add("Cache-Control", "no-store, max-age=0");
-                        }
-                    }
-                };
-            });
-        }
+            };
+        });
     }
 }

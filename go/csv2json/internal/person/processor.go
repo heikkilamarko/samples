@@ -1,6 +1,7 @@
 package person
 
 import (
+	"csv2json/internal/csv2json"
 	"strconv"
 	"time"
 )
@@ -12,13 +13,10 @@ func NewProcessor() *Processor {
 }
 
 func (p *Processor) Process(header, item []string) (interface{}, error) {
-	m := map[string]string{}
-
-	for i, v := range item {
-		m[header[i]] = v
+	m, err := csv2json.ToMap(header, item)
+	if err != nil {
+		return nil, err
 	}
-
-	var err error
 
 	person := &Person{Name: m["name"]}
 

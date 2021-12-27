@@ -1,6 +1,7 @@
 package person
 
 import (
+	"csv2json/internal/csv2json"
 	"time"
 
 	"github.com/mitchellh/mapstructure"
@@ -13,32 +14,25 @@ func NewAutoProcessor() *AutoProcessor {
 }
 
 func (p *AutoProcessor) Process(header, item []string) (interface{}, error) {
-	m := map[string]string{}
-
-	for i, v := range item {
-		m[header[i]] = v
-	}
-
-	person := &Person{}
-
-	if err := p.decode(m, person); err != nil {
+	m, err := csv2json.ToMap(header, item)
+	if err != nil {
 		return nil, err
 	}
 
-	return person, nil
-}
-
-func (p *AutoProcessor) decode(from map[string]string, to *Person) error {
 	c := &mapstructure.DecoderConfig{
-		Result:           to,
+		Result:           &Person{},
 		WeaklyTypedInput: true,
 		DecodeHook:       mapstructure.StringToTimeHookFunc(time.RFC3339),
 	}
 
 	d, err := mapstructure.NewDecoder(c)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	return d.Decode(from)
+	if err := d.Decode(m); err != nil {
+		return nil, err
+	}
+
+	return c.Result, nil
 }

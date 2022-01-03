@@ -12,6 +12,7 @@
 ## HTTP Routing
 
 - [gorilla/mux](https://github.com/gorilla/mux)
+- [chi](https://go-chi.io/)
 
 ## Embedded SPA Frontend
 
@@ -65,5 +66,6 @@
 
 - [GJSON](https://github.com/tidwall/gjson)
 - [SJSON](https://github.com/tidwall/sjson)
+- [jsonparser](https://github.com/buger/jsonparser)
 - [mapstructure](https://github.com/mitchellh/mapstructure)
 - [gojsonschema](https://github.com/xeipuuv/gojsonschema)

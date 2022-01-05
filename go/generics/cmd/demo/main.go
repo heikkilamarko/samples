@@ -24,16 +24,10 @@ func main() {
 		g.IsNotEqual("1", "2"),
 		// true
 
-		g.IsEqual(
-			dude{Name: "a", Age: 1},
-			dude{Name: "a", Age: 1},
-		),
+		g.IsEqual(dude{"a", 1}, dude{"a", 1}),
 		// true
 
-		g.IsNotEqual(
-			dude{Name: "a", Age: 1},
-			dude{Name: "a", Age: 1},
-		),
+		g.IsNotEqual(dude{"a", 1}, dude{"a", 1}),
 		// false
 
 		g.Filter([]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
@@ -57,5 +51,10 @@ func main() {
 			),
 		),
 		// [a b e jj]
+
+		g.Filter([]dude{{"a", 10}, {"b", 30}, {"c", 40}},
+			func(d dude) bool { return 18 < d.Age },
+		),
+		// [{b 30} {c 40}]
 	)
 }

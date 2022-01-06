@@ -5,9 +5,17 @@ import (
 	g "generics/internal/generics"
 )
 
-type dude struct {
+type person struct {
 	Name string
 	Age  int
+}
+
+func isAdult(p person) (bool, error) {
+	return 18 < p.Age, nil
+}
+
+func getName(p person) (string, error) {
+	return p.Name, nil
 }
 
 func main() {
@@ -24,12 +32,14 @@ func main() {
 		g.IsNotEqual("1", "2"),
 		// true
 
-		g.IsEqual(dude{"a", 1}, dude{"a", 1}),
+		g.IsEqual(person{"a", 1}, person{"a", 1}),
 		// true
 
-		g.IsNotEqual(dude{"a", 1}, dude{"a", 1}),
+		g.IsNotEqual(person{"a", 1}, person{"a", 1}),
 		// false
+	)
 
+	fmt.Println(
 		g.Filter([]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
 			g.Or(
 				g.Equal(9),
@@ -37,8 +47,10 @@ func main() {
 				g.LessThan(3),
 			),
 		),
-		// [1 2 4 5 6 9]
+	)
+	// [1 2 4 5 6 9] <nil>
 
+	fmt.Println(
 		g.Filter([]string{"a", "b", "c", "d", "e", "f", "g", "h", "i", "jj", "kk"},
 			g.Or(
 				g.Equal("e"),
@@ -50,11 +62,20 @@ func main() {
 				),
 			),
 		),
-		// [a b e jj]
-
-		g.Filter([]dude{{"a", 10}, {"b", 30}, {"c", 40}},
-			func(d dude) bool { return 18 < d.Age },
-		),
-		// [{b 30} {c 40}]
 	)
+	// [a b e jj] <nil>
+
+	people := []person{{"a", 10}, {"b", 30}, {"c", 40}}
+
+	people, _ = g.Filter(people, isAdult)
+	fmt.Println(people)
+	// [{b 30} {c 40}]
+
+	names, _ := g.Map(people, getName)
+	fmt.Println(names)
+	// [b c]
+
+	names, _ = g.Filter(names, g.NotEqual("b"))
+	fmt.Println(names)
+	// [c]
 }

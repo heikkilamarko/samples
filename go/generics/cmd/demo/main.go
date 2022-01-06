@@ -110,4 +110,30 @@ func main() {
 	names, _ = g.Filter(names, g.NotEqual("b"))
 	fmt.Println(names)
 	// [c]
+
+	numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	fmt.Println(numbers)
+	// [1 2 3 4 5 6 7 8 9 10]
+
+	fmt.Println(g.Page(numbers, -1, 0))
+	// [] invalid offset
+
+	fmt.Println(g.Page(numbers, 0, 0))
+	// [] invalid limit
+
+	for offset, limit := 0, 3; ; offset += limit {
+		page, err := g.Page(numbers, offset, limit)
+		if err != nil {
+			fmt.Println("ERROR:", err)
+			break
+		}
+		if len(page) == 0 {
+			break
+		}
+		fmt.Println(page)
+	}
+	// [1 2 3]
+	// [4 5 6]
+	// [7 8 9]
+	// [10]
 }

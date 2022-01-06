@@ -18,6 +18,24 @@ func getName(p person) (string, error) {
 	return p.Name, nil
 }
 
+func ageAsc(p []person) func(i, j int) bool {
+	return func(i, j int) bool {
+		return p[i].Age < p[j].Age
+	}
+}
+
+func ageDesc(p []person) func(i, j int) bool {
+	return func(i, j int) bool {
+		return p[j].Age < p[i].Age
+	}
+}
+
+func stringAsc(s []string) func(i, j int) bool {
+	return func(i, j int) bool {
+		return s[i] < s[j]
+	}
+}
+
 func main() {
 	fmt.Println(
 		g.IsEqual(1, 1),
@@ -65,13 +83,27 @@ func main() {
 	)
 	// [a b e jj] <nil>
 
-	people := []person{{"a", 10}, {"b", 30}, {"c", 40}}
+	people := []person{{"b", 30}, {"a", 10}, {"c", 40}}
+	fmt.Println(people)
+	// [{b 30} {a 10} {c 40}]
+
+	people, _ = g.OrderBy(people, ageAsc(people))
+	fmt.Println(people)
+	// [{a 10} {b 30} {c 40}]
+
+	people, _ = g.OrderBy(people, ageDesc(people))
+	fmt.Println(people)
+	// [{c 40} {b 30} {a 10}]
 
 	people, _ = g.Filter(people, isAdult)
 	fmt.Println(people)
-	// [{b 30} {c 40}]
+	// [{c 40} {b 30}]
 
 	names, _ := g.Map(people, getName)
+	fmt.Println(names)
+	// [c b]
+
+	names, _ = g.OrderBy(names, stringAsc(names))
 	fmt.Println(names)
 	// [b c]
 

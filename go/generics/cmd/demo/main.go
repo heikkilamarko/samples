@@ -3,38 +3,8 @@ package main
 import (
 	"fmt"
 	g "generics/internal/generics"
+	"generics/internal/person"
 )
-
-type person struct {
-	Name string
-	Age  int
-}
-
-func isAdult(p person) (bool, error) {
-	return 18 < p.Age, nil
-}
-
-func getName(p person) (string, error) {
-	return p.Name, nil
-}
-
-func ageAsc(p []person) func(i, j int) bool {
-	return func(i, j int) bool {
-		return p[i].Age < p[j].Age
-	}
-}
-
-func ageDesc(p []person) func(i, j int) bool {
-	return func(i, j int) bool {
-		return p[j].Age < p[i].Age
-	}
-}
-
-func stringAsc(s []string) func(i, j int) bool {
-	return func(i, j int) bool {
-		return s[i] < s[j]
-	}
-}
 
 func main() {
 	fmt.Println(
@@ -50,10 +20,10 @@ func main() {
 		g.IsNotEqual("1", "2"),
 		// true
 
-		g.IsEqual(person{"a", 1}, person{"a", 1}),
+		g.IsEqual(person.New("a", 1), person.New("a", 1)),
 		// true
 
-		g.IsNotEqual(person{"a", 1}, person{"a", 1}),
+		g.IsNotEqual(person.New("a", 1), person.New("a", 1)),
 		// false
 	)
 
@@ -83,27 +53,32 @@ func main() {
 	)
 	// [a b e jj] <nil>
 
-	people := []person{{"b", 30}, {"a", 10}, {"c", 40}}
+	people := []person.Person{
+		person.New("b", 30),
+		person.New("a", 10),
+		person.New("c", 40),
+	}
+
 	fmt.Println(people)
 	// [{b 30} {a 10} {c 40}]
 
-	people, _ = g.OrderBy(people, ageAsc(people))
+	people, _ = g.OrderBy(people, person.AgeAsc(people))
 	fmt.Println(people)
 	// [{a 10} {b 30} {c 40}]
 
-	people, _ = g.OrderBy(people, ageDesc(people))
+	people, _ = g.OrderBy(people, person.AgeDesc(people))
 	fmt.Println(people)
 	// [{c 40} {b 30} {a 10}]
 
-	people, _ = g.Filter(people, isAdult)
+	people, _ = g.Filter(people, person.IsAdult)
 	fmt.Println(people)
 	// [{c 40} {b 30}]
 
-	names, _ := g.Map(people, getName)
+	names, _ := g.Map(people, person.GetName)
 	fmt.Println(names)
 	// [c b]
 
-	names, _ = g.OrderBy(names, stringAsc(names))
+	names, _ = g.OrderBy(names, person.StringAsc(names))
 	fmt.Println(names)
 	// [b c]
 

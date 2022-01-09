@@ -7,25 +7,6 @@ import (
 )
 
 func main() {
-	fmt.Println(
-		g.IsEqual(1, 1),
-		// true
-
-		g.IsNotEqual(1, 1),
-		// false
-
-		g.IsEqual("1", "2"),
-		// false
-
-		g.IsNotEqual("1", "2"),
-		// true
-
-		g.IsEqual(person.New("a", 1), person.New("a", 1)),
-		// true
-
-		g.IsNotEqual(person.New("a", 1), person.New("a", 1)),
-		// false
-	)
 
 	fmt.Println(
 		g.Filter([]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
@@ -62,23 +43,23 @@ func main() {
 	fmt.Println(people)
 	// [{b 30} {a 10} {c 40}]
 
-	people, _ = g.OrderBy(people, person.AgeAsc(people))
+	people, _ = g.OrderBy(people, func(i, j int) bool { return people[i].Age < people[j].Age })
 	fmt.Println(people)
 	// [{a 10} {b 30} {c 40}]
 
-	people, _ = g.OrderBy(people, person.AgeDesc(people))
+	people, _ = g.OrderBy(people, func(i, j int) bool { return people[j].Age < people[i].Age })
 	fmt.Println(people)
 	// [{c 40} {b 30} {a 10}]
 
-	people, _ = g.Filter(people, person.IsAdult)
+	people, _ = g.Filter(people, func(p person.Person) (bool, error) { return p.IsAdult(), nil })
 	fmt.Println(people)
 	// [{c 40} {b 30}]
 
-	names, _ := g.Map(people, person.GetName)
+	names, _ := g.Map(people, func(p person.Person) (string, error) { return p.Name, nil })
 	fmt.Println(names)
 	// [c b]
 
-	names, _ = g.OrderBy(names, person.StringAsc(names))
+	names, _ = g.OrderBy(names, func(i, j int) bool { return names[i] < names[j] })
 	fmt.Println(names)
 	// [b c]
 

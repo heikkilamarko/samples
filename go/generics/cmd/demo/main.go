@@ -36,11 +36,11 @@ func main() {
 	fmt.Println(people)
 	// [{b 30} {a 10} {c 40}]
 
-	people, _ = g.OrderBy(people, func(i, j int) bool { return people[i].Age < people[j].Age })
+	people, _ = g.OrderBy(people, func(a, b person.Person) bool { return a.Age < b.Age })
 	fmt.Println(people)
 	// [{a 10} {b 30} {c 40}]
 
-	people, _ = g.OrderBy(people, func(i, j int) bool { return people[j].Age < people[i].Age })
+	people, _ = g.OrderBy(people, func(a, b person.Person) bool { return b.Age < a.Age })
 	fmt.Println(people)
 	// [{c 40} {b 30} {a 10}]
 
@@ -52,7 +52,7 @@ func main() {
 	fmt.Println(names)
 	// [c b]
 
-	names, _ = g.OrderBy(names, func(i, j int) bool { return names[i] < names[j] })
+	names, _ = g.OrderBy(names, func(a, b string) bool { return a < b })
 	fmt.Println(names)
 	// [b c]
 

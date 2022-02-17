@@ -1,6 +1,6 @@
 package generics
 
-import "constraints"
+import "golang.org/x/exp/constraints"
 
 type Predicate[T any] func(T) (bool, error)
 

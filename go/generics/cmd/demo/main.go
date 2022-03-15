@@ -24,7 +24,7 @@ func main() {
 			g.LessThan("c"),
 			g.And(
 				g.GreaterThan("h"),
-				g.StringLength(2),
+				g.StringLength[string](2),
 				g.NotEqual("kk"),
 			),
 		),

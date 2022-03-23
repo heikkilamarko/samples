@@ -25,6 +25,6 @@ SQL Server password policy requirements: **The password must be at least 8 chara
 ## Run migrations
 
 ```bash
-> docker-compose build migrate
-> docker-compose run migrate
+> docker compose build migrate
+> docker compose run migrate
 ```

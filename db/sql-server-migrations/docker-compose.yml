@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Express
+      - SA_PASSWORD=${SA_PASSWORD}
+    ports:
+      - 1433:1433
+    volumes:
+      - sql-server:/var/opt/mssql
+    networks:
+      - sql-server
+
+  migrate:
+    build: ./migrate
+    image: sql-server/migrate
+    deploy:
+      restart_policy:
+        condition: on-failure
+    environment:
+      - SQLSERVER_CONNECTIONSTRING=sqlserver://sa:${SA_PASSWORD}@sql-server:1433?database=todos
+    networks:
+      - sql-server
+    depends_on:
+      - sql-server
+
+networks:
+  sql-server:
+
+volumes:
+  sql-server:

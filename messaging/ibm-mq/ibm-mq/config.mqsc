@@ -1,0 +1,8 @@
+* --------------------------------------------------------
+* Demo configuration
+* --------------------------------------------------------
+*
+DEFINE  CHANNEL(CH.SVR.DEMO) +
+        CHLTYPE(SVRCONN) +
+        TRPTYPE(TCP) +
+        DESCR('demo channel')

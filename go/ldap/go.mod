@@ -1,4 +1,4 @@
-module github.com/hashicorp/cap/ldap/examples/cli
+module ldap-sample
 
 go 1.18
 

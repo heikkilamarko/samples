@@ -3,7 +3,7 @@
   "main": "index.js",
   "type": "module",
   "dependencies": {
-    "commander": "9.0.0",
+    "commander": "9.2.0",
     "csv-parse": "5.0.4"
   }
 }

@@ -2,4 +2,4 @@ module generics
 
 go 1.18
 
-require golang.org/x/exp v0.0.0-20220317015231-48e79f11773a
+require golang.org/x/exp v0.0.0-20220414153411-bcd21879b8fd

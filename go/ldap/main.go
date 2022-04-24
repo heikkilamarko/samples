@@ -62,6 +62,7 @@ func parseFlags() (username, password string) {
 }
 
 func getBindDN(username, domain string) string {
+	username = ldap.EscapeValue(username)
 	if _, _, found := strings.Cut(username, "@"); found {
 		return username
 	}

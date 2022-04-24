@@ -2,7 +2,10 @@ module ldap-sample
 
 go 1.18
 
-require github.com/hashicorp/cap/ldap v0.0.0-20220408131637-6d654cde3216
+require (
+	github.com/hashicorp/cap/ldap v0.0.0-20220408131637-6d654cde3216
+	github.com/joho/godotenv v1.4.0
+)
 
 require (
 	github.com/Azure/go-ntlmssp v0.0.0-20211209120228-48547f28849e // indirect

@@ -18,9 +18,10 @@ func main() {
 
 	config := &ldap.ClientConfig{
 		URLs:           urls,
-		UserDN:         "DC=...,DC=...",
 		BindDN:         fmt.Sprintf("%s@%s", username, domain),
 		BindPassword:   password,
+		UserDN:         "DC=...,DC=...",
+		GroupDN:        "DC=...,DC=...",
 		UserFilter:     fmt.Sprintf("(sAMAccountName=%s)", username),
 		UseTokenGroups: true,
 	}
@@ -37,26 +38,21 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if result.Success {
-		fmt.Println("--------------------------------")
-		fmt.Println(username)
-		fmt.Println("--------------------------------")
-		if 0 < len(result.Groups) {
-			for _, group := range result.Groups {
-				fmt.Println(group)
-			}
-		}
-		fmt.Println("--------------------------------")
-	}
+	printUsername(username)
 
-	fmt.Println(isMemberOf("...", result.Groups))
+	if result.Success {
+		printGroups(result.Groups)
+	}
 }
 
-func isMemberOf(group string, groups []string) bool {
-	for _, g := range groups {
-		if g == group {
-			return true
-		}
+func printUsername(username string) {
+	fmt.Println("[username]")
+	fmt.Printf("\t%s\n", username)
+}
+
+func printGroups(groups []string) {
+	fmt.Printf("[groups (%d)]\n", len(groups))
+	for i, group := range groups {
+		fmt.Printf("\t%3d. %s\n", i+1, group)
 	}
-	return false
 }

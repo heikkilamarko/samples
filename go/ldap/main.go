@@ -23,7 +23,7 @@ func main() {
 		UserDN:         "DC=...,DC=...",
 		GroupDN:        "DC=...,DC=...",
 		UserFilter:     fmt.Sprintf("(sAMAccountName=%s)", username),
-		UseTokenGroups: true,
+		UseTokenGroups: false,
 	}
 
 	client, err := ldap.NewClient(ctx, config)

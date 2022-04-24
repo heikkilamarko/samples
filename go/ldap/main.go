@@ -25,7 +25,7 @@ func main() {
 		UserDN:         os.Getenv("LDAP_USER_DN"),
 		GroupDN:        os.Getenv("LDAP_GROUP_DN"),
 		UserFilter:     getUserFilter(username),
-		UseTokenGroups: false,
+		UseTokenGroups: os.Getenv("LDAP_USE_TOKEN_GROUPS") == "true",
 	}
 
 	ctx := context.Background()

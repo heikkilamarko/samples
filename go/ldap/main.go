@@ -24,7 +24,7 @@ func main() {
 		BindPassword:   password,
 		UserDN:         os.Getenv("LDAP_USER_DN"),
 		GroupDN:        os.Getenv("LDAP_GROUP_DN"),
-		UserFilter:     getUserFilter(username),
+		UserFilter:     os.Getenv("LDAP_USER_FILTER"),
 		UseTokenGroups: os.Getenv("LDAP_USE_TOKEN_GROUPS") == "true",
 	}
 
@@ -66,10 +66,6 @@ func getBindDN(username, domain string) string {
 		return username
 	}
 	return fmt.Sprintf("%s@%s", username, domain)
-}
-
-func getUserFilter(username string) string {
-	return fmt.Sprintf("(|(sAMAccountName=%s)(userPrincipalName=%s))", username, username)
 }
 
 func printUsername(username string) {

@@ -27,6 +27,7 @@
 - [Gorilla WebSocket](https://github.com/gorilla/websocket)
 - [Centrifugo Server](https://centrifugal.dev/)
 - [Centrifuge Library](https://github.com/centrifugal/centrifuge)
+- [NATS](https://nats.io/)
 
 ## Auth
 
@@ -71,10 +72,27 @@
 
 - [Benthos](https://www.benthos.dev/)
 
-## Application Proxy / Edge Router
+## Reverse Proxy
 
+- [Caddy](https://caddyserver.com/)
 - [Traefik](https://traefik.io/traefik/)
+
+## Web Server
+
+- [Caddy](https://caddyserver.com/)
+
+## Job Scheduling and Orchestration
+
+- [Nomad](https://www.nomadproject.io/)
+
+## Health Checking
+
+- [Consul](https://www.consul.io/)
 
 ## Observability
 
 - [Grafana Stack](https://grafana.com/)
+
+## Identity and Access Management (IAM)
+
+- [Keycloak](https://www.keycloak.org/)

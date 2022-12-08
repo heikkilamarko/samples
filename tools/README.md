@@ -51,6 +51,10 @@
 
 - [Keycloak](https://www.keycloak.org/)
 
+## Policy Engine
+
+- [Open Policy Agent (OPA)](https://www.openpolicyagent.org/)
+
 ## Testing
 
 - [Postman](https://www.postman.com/) + [Newman](https://learning.postman.com/docs/running-collections/using-newman-cli/command-line-integration-with-newman/)

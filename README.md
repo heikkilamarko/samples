@@ -1,3 +1,3 @@
-# samples
+# Samples
 
-Misc sample code and tips.
+Miscellaneous stuff.

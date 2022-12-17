@@ -3,24 +3,9 @@ package authz
 # role-permissions assignments
 
 role_permissions := {
-	"engineering": [{
-		"action": "read",
-		"object": "server123",
-	}],
-	"webdev": [
-		{
-			"action": "read",
-			"object": "server123",
-		},
-		{
-			"action": "write",
-			"object": "server123",
-		},
-	],
-	"hr": [{
-		"action": "read",
-		"object": "database456",
-	}],
+	"sample.admin": ["sample.read", "sample.write"],
+	"sample.reader": ["sample.read"],
+	"sample.writer": ["sample.read", "sample.write"],
 }
 
 # RBAC logic
@@ -41,5 +26,5 @@ allow {
 	p := permissions[_]
 
 	# check if the permission granted to r matches the user's request
-	p == {"action": input.action, "object": input.object}
+	p == input.permission
 }

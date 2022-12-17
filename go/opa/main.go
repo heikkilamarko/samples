@@ -11,27 +11,79 @@ func main() {
 	az, err := NewAuthZ(ctx)
 	checkErr(err)
 
-	// sample input as struct
+	// allow: false
+	run(ctx, az, nil)
+
+	// allow: false
+	run(ctx, az, AuthZInput{})
+
+	// allow: false
 	run(ctx, az, AuthZInput{
-		Action: "read",
-		Object: "server123",
+		Permission: "",
+		Token:      nil,
+	})
+
+	// allow: false
+	run(ctx, az, AuthZInput{
+		Permission: "sample.write",
+		Token:      nil,
+	})
+
+	// allow: false
+	run(ctx, az, AuthZInput{
+		Permission: "sample.write",
 		Token: map[string]any{
 			"resource_access": map[string]any{
-				"sample-api": map[string]any{
-					"roles": []string{"hr"},
+				"wrong-api": map[string]any{
+					"roles": []string{},
 				},
 			},
 		},
 	})
 
-	// sample input as map
+	// allow: false
+	run(ctx, az, AuthZInput{
+		Permission: "sample.write",
+		Token: map[string]any{
+			"resource_access": map[string]any{
+				"sample-api": map[string]any{
+					"roles": []string{},
+				},
+			},
+		},
+	})
+
+	// allow: false
+	run(ctx, az, AuthZInput{
+		Permission: "sample.write",
+		Token: map[string]any{
+			"resource_access": map[string]any{
+				"sample-api": map[string]any{
+					"roles": []string{"sample.reader"},
+				},
+			},
+		},
+	})
+
+	// allow: true
+	run(ctx, az, AuthZInput{
+		Permission: "sample.write",
+		Token: map[string]any{
+			"resource_access": map[string]any{
+				"sample-api": map[string]any{
+					"roles": []string{"sample.writer"},
+				},
+			},
+		},
+	})
+
+	// allow: true
 	run(ctx, az, map[string]any{
-		"action": "read",
-		"object": "server123",
+		"permission": "sample.write",
 		"token": map[string]any{
 			"resource_access": map[string]any{
 				"sample-api": map[string]any{
-					"roles": []string{"hr", "engineering"},
+					"roles": []string{"sample.reader", "sample.admin"},
 				},
 			},
 		},

@@ -15,9 +15,8 @@ type AuthZ struct {
 }
 
 type AuthZInput struct {
-	Action string `json:"action"`
-	Object string `json:"object"`
-	Token  any    `json:"token"`
+	Permission string `json:"permission"`
+	Token      any    `json:"token"`
 }
 
 func NewAuthZ(ctx context.Context) (*AuthZ, error) {

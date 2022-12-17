@@ -1,15 +1,5 @@
 package authz
 
-# user-role assignments
-
-user_roles := {
-	"alice": [
-		"engineering",
-		"webdev",
-	],
-	"bob": ["hr"],
-}
-
 # role-permissions assignments
 
 role_permissions := {
@@ -33,13 +23,13 @@ role_permissions := {
 	}],
 }
 
-# logic that implements RBAC
+# RBAC logic
 
 default allow = false
 
 allow {
-	# lookup the list of roles for the user
-	roles := user_roles[input.user]
+	# lookup the list of roles for the token
+	roles := input.token.resource_access["sample-api"].roles
 
 	# for each role in that list
 	r := roles[_]

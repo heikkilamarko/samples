@@ -11,7 +11,6 @@
 
 ## HTTP Routing
 
-- [gorilla/mux](https://github.com/gorilla/mux)
 - [chi](https://go-chi.io/)
 
 ## Embedded SPA Frontend

@@ -91,10 +91,10 @@ func main() {
 }
 
 func run(ctx context.Context, az *AuthZ, input any) {
-	allow, err := az.Authorize(ctx, input)
+	result, err := az.Authorize(ctx, input)
 	checkErr(err)
 
-	log.Printf("allow: %t\n", allow)
+	log.Printf("%#v", result)
 }
 
 func checkErr(err error) {

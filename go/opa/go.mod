@@ -3,7 +3,7 @@ module opa-sample
 go 1.19
 
 require (
-	github.com/open-policy-agent/opa v0.47.3
+	github.com/open-policy-agent/opa v0.47.4
 	github.com/samber/lo v1.37.0
 )
 

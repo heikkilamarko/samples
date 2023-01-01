@@ -4,6 +4,10 @@
 
 - [godotenv](https://github.com/joho/godotenv)
 
+## Generics
+
+- [lo](https://github.com/samber/lo)
+
 ## Logging
 
 - [zerolog](https://github.com/rs/zerolog)

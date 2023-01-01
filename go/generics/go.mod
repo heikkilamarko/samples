@@ -1,5 +1,5 @@
 module generics
 
-go 1.18
+go 1.19
 
-require golang.org/x/exp v0.0.0-20220518171630-0b5c67f07fdf
+require golang.org/x/exp v0.0.0-20221230185412-738e83a70c30

@@ -1,9 +1,9 @@
 module opa-sample
 
-go 1.19
+go 1.20
 
 require (
-	github.com/open-policy-agent/opa v0.47.4
+	github.com/open-policy-agent/opa v0.49.2
 	github.com/samber/lo v1.37.0
 )
 
@@ -12,7 +12,6 @@ require (
 	github.com/agnivade/levenshtein v1.1.1 // indirect
 	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
-	github.com/pkg/errors v0.9.1 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20200313005456-10cdbea86bc0 // indirect
 	github.com/tchap/go-patricia/v2 v2.3.1 // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190905194746-02993c407bfb // indirect

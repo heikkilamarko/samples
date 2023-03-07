@@ -10,12 +10,28 @@
 
 - [SOPS](https://github.com/mozilla/sops/)
 
+## Key-Value Storage
+
+- [Redis](https://redis.io/)
+- [NATS](https://nats.io/)
+
 ## Object Storage
 
 - [MinIO](https://min.io/)
+- [NATS](https://nats.io/)
 
 ## Messaging
 
+- [NATS](https://nats.io/)
+
+## WebSockets
+
+- [NATS](https://nats.io/)
+- [Centrifugo](https://centrifugal.dev/)
+
+## Distributed Applications / Microservices
+
+- [Service Weaver](https://serviceweaver.dev/)
 - [NATS](https://nats.io/)
 
 ## Workflow Orchestration

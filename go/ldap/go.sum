@@ -9,8 +9,8 @@ github.com/go-asn1-ber/asn1-ber v1.5.4 h1:vXT6d/FNDiELJnLb6hGNa309LMsrCoYFvpwHDF
 github.com/go-asn1-ber/asn1-ber v1.5.4/go.mod h1:hEBeB/ic+5LoWskz+yKT7vGhhPYkProFKoKdwZRWMe0=
 github.com/go-ldap/ldap/v3 v3.4.4 h1:qPjipEpt+qDa6SI/h1fzuGWoRUY+qqQ9sOZq67/PYUs=
 github.com/go-ldap/ldap/v3 v3.4.4/go.mod h1:fe1MsuN5eJJ1FeLT/LEBVdWfNWKh459R7aXgXtJC+aI=
-github.com/hashicorp/cap/ldap v0.0.0-20230221194157-7894fed1633d h1:fZWMDg+sEy034H4lKPerr3+yTAJGoaAewOs0QiVwqZ4=
-github.com/hashicorp/cap/ldap v0.0.0-20230221194157-7894fed1633d/go.mod h1:9rAvcOfZF5fAYoN4GRtEI5w0F9Uj/oDAqMndkoRnPrI=
+github.com/hashicorp/cap/ldap v0.0.0-20230714191029-f28ec041b24b h1:5aEp48Bsgnh9UFkilKbkCE5s3ahjkXSNcP+DCYLuV/0=
+github.com/hashicorp/cap/ldap v0.0.0-20230714191029-f28ec041b24b/go.mod h1:9rAvcOfZF5fAYoN4GRtEI5w0F9Uj/oDAqMndkoRnPrI=
 github.com/hashicorp/errwrap v1.0.0/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4=
 github.com/hashicorp/errwrap v1.1.0 h1:OxrOeh75EUXMY8TBjag2fzXGZ40LB6IKw45YeGUDY2I=
 github.com/hashicorp/errwrap v1.1.0/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4=

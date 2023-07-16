@@ -1,6 +1,7 @@
 package main
 
 import (
+	"cmp"
 	"fmt"
 	g "generics/internal/generics"
 	"generics/internal/person"
@@ -36,23 +37,33 @@ func main() {
 	fmt.Println(people)
 	// [{b 30} {a 10} {c 40}]
 
-	people, _ = g.OrderBy(people, func(a, b person.Person) bool { return a.Age < b.Age })
+	people, _ = g.OrderBy(people, func(a, b person.Person) int {
+		return cmp.Compare[int](a.Age, b.Age)
+	})
 	fmt.Println(people)
 	// [{a 10} {b 30} {c 40}]
 
-	people, _ = g.OrderBy(people, func(a, b person.Person) bool { return b.Age < a.Age })
+	people, _ = g.OrderBy(people, func(a, b person.Person) int {
+		return cmp.Compare[int](b.Age, a.Age)
+	})
 	fmt.Println(people)
 	// [{c 40} {b 30} {a 10}]
 
-	people, _ = g.Filter(people, func(p person.Person) (bool, error) { return p.IsAdult(), nil })
+	people, _ = g.Filter(people, func(p person.Person) (bool, error) {
+		return p.IsAdult(), nil
+	})
 	fmt.Println(people)
 	// [{c 40} {b 30}]
 
-	names, _ := g.Map(people, func(p person.Person) (string, error) { return p.Name, nil })
+	names, _ := g.Map(people, func(p person.Person) (string, error) {
+		return p.Name, nil
+	})
 	fmt.Println(names)
 	// [c b]
 
-	names, _ = g.OrderBy(names, func(a, b string) bool { return a < b })
+	names, _ = g.OrderBy(names, func(a, b string) int {
+		return cmp.Compare(a, b)
+	})
 	fmt.Println(names)
 	// [b c]
 

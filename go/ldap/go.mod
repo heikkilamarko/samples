@@ -1,9 +1,9 @@
 module ldap-sample
 
-go 1.20
+go 1.21rc3
 
 require (
-	github.com/hashicorp/cap/ldap v0.0.0-20230221194157-7894fed1633d
+	github.com/hashicorp/cap/ldap v0.0.0-20230714191029-f28ec041b24b
 	github.com/joho/godotenv v1.5.1
 )
 

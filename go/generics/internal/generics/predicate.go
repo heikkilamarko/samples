@@ -1,6 +1,6 @@
 package generics
 
-import "golang.org/x/exp/constraints"
+import "cmp"
 
 type Predicate[T any] func(T) (bool, error)
 
@@ -34,19 +34,19 @@ func Or[T any](ps ...Predicate[T]) Predicate[T] {
 	}
 }
 
-func Between[T constraints.Ordered](t1, t2 T) Predicate[T] {
+func Between[T cmp.Ordered](t1, t2 T) Predicate[T] {
 	return func(v T) (bool, error) {
 		return t1 <= v && v <= t2, nil
 	}
 }
 
-func LessThan[T constraints.Ordered](t T) Predicate[T] {
+func LessThan[T cmp.Ordered](t T) Predicate[T] {
 	return func(v T) (bool, error) {
 		return v < t, nil
 	}
 }
 
-func GreaterThan[T constraints.Ordered](t T) Predicate[T] {
+func GreaterThan[T cmp.Ordered](t T) Predicate[T] {
 	return func(v T) (bool, error) {
 		return t < v, nil
 	}

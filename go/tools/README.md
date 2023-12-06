@@ -36,6 +36,7 @@
 ## Auth
 
 - [hashicorp/cap](https://github.com/hashicorp/cap)
+- [zitadel/oidc](https://github.com/zitadel/oidc)
 - [go-jose](https://github.com/go-jose/go-jose)
 
 ## Validation

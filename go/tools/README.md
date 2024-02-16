@@ -64,3 +64,7 @@
 ## Data Engineering
 
 - [Benthos](https://www.benthos.dev/)
+
+## Expression Languages
+
+- [Expr](https://github.com/expr-lang/expr)

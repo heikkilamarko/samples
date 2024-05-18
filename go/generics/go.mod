@@ -1,3 +1,3 @@
 module generics
 
-go 1.21rc3
+go 1.22.3

@@ -55,9 +55,9 @@ func generate(n int, o string) error {
 			id(i),
 			name(i),
 			age(i),
-			height(i),
+			height(),
 			isActive(i),
-			createdAt(i),
+			createdAt(),
 		})
 	}
 
@@ -76,7 +76,7 @@ func age(i int) string {
 	return fmt.Sprintf("%d", i%100)
 }
 
-func height(i int) string {
+func height() string {
 	return fmt.Sprintf("%f", 1.80)
 }
 
@@ -84,6 +84,6 @@ func isActive(i int) string {
 	return fmt.Sprintf("%t", i%2 == 0)
 }
 
-func createdAt(i int) string {
+func createdAt() string {
 	return time.Now().Format("2006-01-02T15:04:05Z")
 }

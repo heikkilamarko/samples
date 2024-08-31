@@ -1,7 +1,6 @@
 import csv
 import json
 
-
 def process_file(in_file_path, out_file_path, process_item):
     with open(in_file_path, 'r') as in_file:
         reader = csv.DictReader(in_file)

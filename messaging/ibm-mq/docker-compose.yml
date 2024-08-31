@@ -5,11 +5,8 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-    environment:
-      - LICENSE=accept
-      - MQ_DEV=false
-      - MQ_QMGR_NAME=QMGRDEMO
-      - MQ_ADMIN_PASSWORD=${MQ_ADMIN_PASSWORD}
+    env_file:
+      - .env
     ports:
       - 1414:1414
       - 9443:9443

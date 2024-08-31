@@ -11,8 +11,6 @@
 ## Logging
 
 - [slog](https://pkg.go.dev/log/slog)
-- [zerolog](https://github.com/rs/zerolog)
-- [zap](https://github.com/uber-go/zap)
 
 ## HTTP Routing
 
@@ -63,7 +61,7 @@
 
 ## Data Engineering
 
-- [Benthos](https://www.benthos.dev/)
+- [Redpanda Connect](https://docs.redpanda.com/redpanda-connect/)
 
 ## Expression Languages
 

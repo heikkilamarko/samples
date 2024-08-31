@@ -1,4 +1,4 @@
-﻿using CommandLine;
+using CommandLine;
 using csv2json;
 
 Parser.Default.ParseArguments<CliOptions>(args).WithParsed(o =>

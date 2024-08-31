@@ -13,18 +13,18 @@ SQL Server password policy requirements: **The password must be at least 8 chara
 ## Start SQL Server
 
 ```bash
-> docker compose up --build -d sql-server
+docker compose up --build -d sql-server
 ```
 
 ## Create database
 
 ```bash
-> SA_PASSWORD={SA_PASSWORD} ./create_database.sh
+SA_PASSWORD={SA_PASSWORD} ./create_database.sh
 ```
 
 ## Run migrations
 
 ```bash
-> docker compose build migrate
-> docker compose run migrate
+docker compose build migrate
+docker compose run migrate
 ```

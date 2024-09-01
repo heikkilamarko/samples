@@ -8,7 +8,7 @@ role_permissions := {
 	"sample.writer": ["sample.read", "sample.write"],
 }
 
-default allow = false
+default allow := false
 
 allow if {
 	p := permissions[_]

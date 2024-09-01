@@ -40,24 +40,30 @@ func NewAuthZ(ctx context.Context) (*AuthZ, error) {
 }
 
 func (az *AuthZ) Authorize(ctx context.Context, input any) (*AuthZResult, error) {
-	r, err := az.query.Eval(ctx, rego.EvalInput(input))
+	result, err := az.query.Eval(ctx, rego.EvalInput(input))
 	if err != nil {
 		return nil, err
 	}
 
-	allow, ok := r[0].Bindings["allow"].(bool)
-	if !ok {
-		return nil, errors.New("invalid authz result: allow must be bool")
+	if len(result) == 0 {
+		return nil, errors.New("undefined authz result")
 	}
 
-	p, ok := r[0].Bindings["permissions"].([]any)
+	bindings := result[0].Bindings
+
+	allow, ok := bindings["allow"].(bool)
 	if !ok {
-		return nil, errors.New("invalid authz result: permissions must be []string")
+		return nil, errors.New("unexpected authz result type: 'allow' must be bool")
+	}
+
+	p, ok := bindings["permissions"].([]any)
+	if !ok {
+		return nil, errors.New("unexpected authz result type: 'permissions' must be []string")
 	}
 
 	permissions, ok := lo.FromAnySlice[string](p)
 	if !ok {
-		return nil, errors.New("invalid authz result: permissions must be []string")
+		return nil, errors.New("unexpected authz result type: 'permissions' must be []string")
 	}
 
 	return &AuthZResult{allow, permissions}, nil

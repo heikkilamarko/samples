@@ -1,7 +1,6 @@
 package authz
 
-import future.keywords.contains
-import future.keywords.in
+import rego.v1
 
 role_permissions := {
 	"sample.admin": ["sample.read", "sample.write"],
@@ -11,12 +10,12 @@ role_permissions := {
 
 default allow = false
 
-allow {
+allow if {
 	p := permissions[_]
 	p == input.permission
 }
 
-permissions contains p {
+permissions contains p if {
 	some r in input.token.resource_access["sample-api"].roles
 	some p in role_permissions[r]
 }

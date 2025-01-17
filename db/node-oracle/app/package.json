@@ -1,0 +1,13 @@
+{
+	"name": "app",
+	"version": "1.0.0",
+	"main": "app.js",
+	"type": "module",
+	"scripts": {
+		"format": "prettier --write ."
+	},
+	"dependencies": {
+		"oracledb": "6.7.1",
+		"prettier": "3.4.2"
+	}
+}

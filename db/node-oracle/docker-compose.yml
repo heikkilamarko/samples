@@ -1,0 +1,19 @@
+services:
+  oracle:
+    build: ./oracle
+    image: demo/oracle
+    environment:
+      - ORACLE_PASSWORD=demopwd
+    volumes:
+      - oracle:/opt/oracle/oradata
+    ports:
+      - "1521:1521"
+    networks:
+      - demo
+
+networks:
+  demo:
+    name: demo
+
+volumes:
+  oracle:
